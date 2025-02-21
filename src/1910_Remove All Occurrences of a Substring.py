@@ -21,3 +21,21 @@ class Solution:
 # - Use a stack / lazy removal?
 # - KMP
 ##
+
+# WIP: Stack
+class Solution:
+    def removeOccurrences(self, s: str, part: str) -> str:
+        stack=[]
+
+        if len(part) > len(s):
+            return s
+        
+        left = 0
+        end = len(part) -1
+        for i in range(len(s)):
+            if part[left] == s[i]:
+                stack.append(i)
+            if left == end:
+                # remove from s
+                # update stack
+                pass
