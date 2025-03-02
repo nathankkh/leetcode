@@ -44,50 +44,12 @@ class NumberContainers(object):
             return -1
         idx_heap = self.num_to_index[number]
 
-        # removal
-        while idx_heap and idx_heap[0] in self.to_remove[number]:
-            heapq.heappop(idx_heap)
-        
-        return idx_heap[0] if idx_heap else -1
+        while idx_heap:
+            curr = idx_heap[0] # idx 
 
-# Your NumberContainers object will be instantiated and called as such:
-# obj = NumberContainers()
-# obj.change(index,number)
-# param_2 = obj.find(number)
-
-instructions=["find","change","change","change","change","find","change","find"]
-nums = [[10],[2,10],[1,10],[3,10],[5,10],[10],[1,20],[10]]
-obj = NumberContainers()
-
-count = 0
-res = []
-for i in instructions:
-    match(i):
-        case "find":
-            
-            res.append(obj.find(nums[count][0]))
-        case "change":
-            obj.change(nums[count][0], nums[count][1])
-            res.append('null')
-    count += 1
-
-print(res)
-
-instructions=["change","find","change","find","find","find"]
-nums = [[1,10],[10],[1,20],[10],[20],[30]]
-obj = NumberContainers()
-
-count = 0
-res = []
-for i in instructions:
-    match(i):
-        case "find":
-            
-            res.append(obj.find(nums[count][0]))
-        case "change":
-            obj.change(nums[count][0], nums[count][1])
-            res.append('null')
-    count += 1
-
-print(res)
-
+            # if it maps to target number, return
+            if self.index_to_num[curr] == number:
+                return curr
+            else:
+                heapq.heappop(idx_heap)
+        return -1
