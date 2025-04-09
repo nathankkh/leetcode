@@ -1,18 +1,11 @@
-import math
-
-
 class Solution:
     def trap(self, height: list[int]) -> int:
-        total = 0
         l,  n = 0, len(height)
         r = n-1
 
-        # when to start counting: 
-        #### if there is at least 1 gap between left and right
-        #### Trapped += (min(left, right) - current height)
-
-        # when to close the window
-        #### 1. When height[left] < height [right]
+        # start with l & r on the outer edges
+        # make the window shorter at each step while keeping track of where the 'walls' are
+        # at each step, increment res by the (smaller of the walls  - current height)
         res = 0
         max_left, max_right = 0,0
         while r > l:
