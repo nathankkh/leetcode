@@ -7,7 +7,28 @@ class ListNode:
 
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        # Edge: 1 or more empty lists
-        
-        # compare heads
-        return min(list1.val, list2.val)
+        temp = []
+        while True:
+            if not list1:
+                while list2:
+                    temp.append(list2.val)
+                    list2 = list2.next
+                break
+            if not list2:
+                while list1:
+                    temp.append(list1.val)
+                    list1 = list1.next
+                break
+            
+            if list1.val > list2.val:
+                temp.append(list2.val)
+                list2 = list2.next
+            else:
+                temp.append(list1.val)
+                list1 = list1.next
+
+        res = tail = ListNode()
+        for i in temp:
+            res.next = ListNode(i)
+            res = res.next
+        return tail.next
