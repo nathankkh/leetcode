@@ -1,30 +1,35 @@
+import math
 from typing import List
 
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
         # return the minimum length of a subarray whose sum is greater than or equal to target
         if nums[0] >= target:
-            return True
+            return 1
         if len(nums) == 1:
-            return False
+            return 0
         left,right=0,1
         n = len(nums)
         curr_sum = nums[0]
-        res = 0
-        if curr_sum >= target:
-            return 1
-        while right < n:
-            # expand until target is reached, shrink left
+        res = math.inf
+        
+        while right < len(nums):
+            curr_sum += nums[right]
+
             while curr_sum >= target:
-                if not res:
-                    res = right - left
+                if right == left: 
+                    res = 1
                 else:
-                    res = min(res, right - left)
+                    res = min((right - left + 1), res)
                 curr_sum -= nums[left]
                 left += 1
-            curr_sum += nums[right]
+
             right += 1
-        return res
+        if res == math.inf:
+            return 0
+        else: 
+            return res
+
 target = 7
 nums=[2,3,1,2,4,3]
 sol = Solution()
