@@ -1,23 +1,17 @@
 from typing import List
-
+# 1, 3, 6, 10, 15
+# 1 + 2 + 3 + 4 + 5
 class Solution:
     def zeroFilledSubarray(self, nums: List[int]) -> int:
         # (n*(n+1))/2
         res=0
-        left = 0
-        right = 0
-        while right < len(nums):
-            if nums[right]!=0:
-                if left != right or right == len(nums)-1:
-                    
-                    length = right - left 
-                    res += (length*(length+1))//2
-                    # close sliding window
-                right += 1
-                left = right
+        curr=0
+        for right in range(len(nums)):
+            if nums[right] == 0:
+                curr += 1
+                res += curr
             else:
-                right += 1
-
+                curr = 0
         return res
 
 tc = [
